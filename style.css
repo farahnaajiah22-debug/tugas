@@ -1,1 +1,1190 @@
+:root {
 
+  --bg: #080b12;
+
+  --panel: #111722;
+
+  --panel2: #171e2c;
+
+  --line: #263044;
+
+  --text: #f4f7fb;
+
+  --muted: #8f9aae;
+
+  --primary: #6366f1;
+
+  --cyan: #22d3ee;
+
+  --green: #34d399;
+
+  --red: #fb7185;
+
+  --amber: #fbbf24;
+
+}
+
+
+* {
+
+  box-sizing: border-box;
+
+}
+
+
+body {
+
+  margin: 0;
+
+  background:
+    radial-gradient(
+      circle at top,
+      #151b2c 0,
+      #080b12 42%
+    );
+
+  color: var(--text);
+
+  font-family:
+    "Space Grotesk",
+    sans-serif;
+
+  min-height: 100vh;
+
+}
+
+
+button,
+input {
+
+  font: inherit;
+
+}
+
+
+button {
+
+  cursor: pointer;
+
+}
+
+
+/* ============================= */
+/* APP */
+/* ============================= */
+
+.app {
+
+  width: min(1500px, 100%);
+
+  min-height: 100vh;
+
+  margin: auto;
+
+  padding:
+    18px
+    20px
+    12px;
+
+}
+
+
+/* ============================= */
+/* HEADER */
+/* ============================= */
+
+.topbar {
+
+  height: 64px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  margin-bottom: 14px;
+
+}
+
+
+.brand {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+}
+
+
+.logo {
+
+  width: 42px;
+
+  height: 42px;
+
+  border:
+    1px solid
+    #4f46e5;
+
+  background: #18183d;
+
+  border-radius: 12px;
+
+  display: grid;
+
+  place-items: center;
+
+  color: #a5b4fc;
+
+  font-size: 24px;
+
+  font-weight: 700;
+
+}
+
+
+.eyebrow {
+
+  font-family:
+    "Fira Code",
+    monospace;
+
+  font-size: 10px;
+
+  color: #7f8ba2;
+
+  letter-spacing: .08em;
+
+}
+
+
+h1 {
+
+  font-size: 18px;
+
+  margin:
+    2px
+    0
+    0;
+
+}
+
+
+.status {
+
+  font:
+    600 10px
+    "Fira Code";
+
+  border:
+    1px solid
+    #275b4a;
+
+  color: var(--green);
+
+  padding:
+    7px
+    10px;
+
+  border-radius: 9px;
+
+  background: #0c241c;
+
+}
+
+
+.status span {
+
+  display: inline-block;
+
+  width: 6px;
+
+  height: 6px;
+
+  background: var(--green);
+
+  border-radius: 50%;
+
+  margin-right: 6px;
+
+}
+
+
+/* ============================= */
+/* DASHBOARD */
+/* ============================= */
+
+.dashboard {
+
+  display: grid;
+
+  grid-template-columns:
+    1.05fr
+    1.25fr
+    1.15fr;
+
+  gap: 14px;
+
+  height:
+    calc(100vh - 105px);
+
+  min-height: 620px;
+
+}
+
+
+/* ============================= */
+/* PANEL */
+/* ============================= */
+
+.panel {
+
+  background:
+    linear-gradient(
+      145deg,
+      #121925,
+      #0e141e
+    );
+
+  border:
+    1px solid
+    var(--line);
+
+  border-radius: 16px;
+
+  padding: 16px;
+
+  overflow: auto;
+
+  box-shadow:
+    0 15px 40px #0005;
+
+}
+
+
+.panel-title {
+
+  font:
+    10px
+    "Fira Code";
+
+  color: #818da5;
+
+  letter-spacing: .08em;
+
+  border-bottom:
+    1px solid
+    #20293a;
+
+  padding-bottom: 10px;
+
+  margin-bottom: 14px;
+
+}
+
+
+.panel-title span {
+
+  color: #818cf8;
+
+  margin-right: 7px;
+
+}
+
+
+.panel-title.small {
+
+  margin-top: 16px;
+
+  margin-bottom: 9px;
+
+}
+
+
+/* ============================= */
+/* PROJECT */
+/* ============================= */
+
+h2 {
+
+  font-size: 20px;
+
+  line-height: 1.2;
+
+  margin:
+    0
+    0
+    9px;
+
+}
+
+
+.muted {
+
+  color: var(--muted);
+
+  font-size: 11px;
+
+  line-height: 1.55;
+
+  margin:
+    6px
+    0;
+
+}
+
+
+.info-box {
+
+  padding:
+    9px
+    10px;
+
+  background: #0b1019;
+
+  border:
+    1px solid
+    #202a3b;
+
+  border-radius: 9px;
+
+  margin-top: 8px;
+
+}
+
+
+.info-box b {
+
+  display: block;
+
+  font-size: 9px;
+
+  color: #66738b;
+
+  text-transform: uppercase;
+
+}
+
+
+.info-box span {
+
+  font-size: 11px;
+
+  color: #d9dfeb;
+
+}
+
+
+/* ============================= */
+/* MEMBERS */
+/* ============================= */
+
+.members {
+
+  display: grid;
+
+  gap: 6px;
+
+}
+
+
+.members div {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 8px;
+
+  padding:
+    8px
+    9px;
+
+  border:
+    1px solid
+    #202a3b;
+
+  background: #0b1019;
+
+  border-radius: 8px;
+
+}
+
+
+.members b {
+
+  font-size: 10px;
+
+}
+
+
+.members small {
+
+  font-size: 8px;
+
+  color: #76839a;
+
+  text-align: right;
+
+}
+
+
+/* ============================= */
+/* CHIPS */
+/* ============================= */
+
+.chips {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 5px;
+
+}
+
+
+.chips span {
+
+  font:
+    9px
+    "Fira Code";
+
+  padding:
+    5px
+    7px;
+
+  border-radius: 6px;
+
+  color: #a5b4fc;
+
+  background: #171943;
+
+  border:
+    1px solid
+    #30336d;
+
+}
+
+
+/* ============================= */
+/* MODE */
+/* ============================= */
+
+.mode-switch {
+
+  display: grid;
+
+  grid-template-columns:
+    1fr
+    1fr;
+
+  background: #0a0f17;
+
+  border:
+    1px solid
+    #222c3c;
+
+  padding: 3px;
+
+  border-radius: 9px;
+
+  margin-bottom: 12px;
+
+}
+
+
+.mode {
+
+  border: 0;
+
+  background: transparent;
+
+  color: #7e8a9f;
+
+  padding: 8px;
+
+  border-radius: 7px;
+
+  font-size: 10px;
+
+  font-weight: 600;
+
+}
+
+
+.mode.active {
+
+  background: var(--primary);
+
+  color: #fff;
+
+}
+
+
+/* ============================= */
+/* INPUT */
+/* ============================= */
+
+label {
+
+  display: block;
+
+  font:
+    9px
+    "Fira Code";
+
+  color: #7d8aa0;
+
+  text-transform: uppercase;
+
+  margin:
+    8px
+    0
+    5px;
+
+}
+
+
+input {
+
+  width: 100%;
+
+  border:
+    1px solid
+    #29354a;
+
+  background: #080d15;
+
+  color: #e7ebf2;
+
+  border-radius: 8px;
+
+  padding:
+    10px
+    11px;
+
+  outline: none;
+
+  font:
+    12px
+    "Fira Code";
+
+}
+
+
+input:focus {
+
+  border-color:
+    #6366f1;
+
+  box-shadow:
+    0 0 0 2px
+    #6366f122;
+
+}
+
+
+/* ============================= */
+/* SYMBOL */
+/* ============================= */
+
+.symbol-row {
+
+  display: flex;
+
+  gap: 5px;
+
+  flex-wrap: wrap;
+
+  margin-top: 7px;
+
+}
+
+
+.symbol-row button,
+.preset-row button {
+
+  border:
+    1px solid
+    #2a3548;
+
+  background: #151c29;
+
+  color: #aeb9ca;
+
+  border-radius: 6px;
+
+  padding:
+    5px
+    8px;
+
+  font-size: 10px;
+
+}
+
+
+.symbol-row button:hover,
+.preset-row button:hover {
+
+  border-color:
+    #6366f1;
+
+  color: #fff;
+
+}
+
+
+/* ============================= */
+/* PRESET */
+/* ============================= */
+
+.preset-row {
+
+  display: flex;
+
+  gap: 5px;
+
+  flex-wrap: wrap;
+
+  align-items: center;
+
+  margin:
+    12px
+    0;
+
+}
+
+
+.preset-row span {
+
+  font:
+    9px
+    "Fira Code";
+
+  color: #67748a;
+
+  margin-right: 2px;
+
+}
+
+
+/* ============================= */
+/* EXECUTE */
+/* ============================= */
+
+.execute {
+
+  width: 100%;
+
+  border: 0;
+
+  border-radius: 9px;
+
+  padding: 11px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #4f46e5,
+      #6366f1
+    );
+
+  color: white;
+
+  font-weight: 700;
+
+  font-size: 11px;
+
+  box-shadow:
+    0 8px 22px
+    #4f46e533;
+
+}
+
+
+.execute:hover {
+
+  filter: brightness(1.1);
+
+}
+
+
+/* ============================= */
+/* RESULT CARD */
+/* ============================= */
+
+.result {
+
+  margin-top: 12px;
+
+  padding: 12px;
+
+  border-radius: 11px;
+
+  border:
+    1px solid
+    #2b3950;
+
+  background: #0b1019;
+
+}
+
+
+.result.valid {
+
+  border-color:
+    #245e4a;
+
+  background:
+    #0a1915;
+
+}
+
+
+.result.invalid {
+
+  border-color:
+    #713546;
+
+  background:
+    #1b0d13;
+
+}
+
+
+.result-head {
+
+  display: flex;
+
+  gap: 9px;
+
+  align-items: center;
+
+}
+
+
+.result-icon {
+
+  width: 27px;
+
+  height: 27px;
+
+  border-radius: 50%;
+
+  display: grid;
+
+  place-items: center;
+
+  background: #123b2e;
+
+  color: var(--green);
+
+  font-weight: 700;
+
+}
+
+
+.result.invalid .result-icon {
+
+  background: #451827;
+
+  color: var(--red);
+
+}
+
+
+.result-title {
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+}
+
+
+.badge {
+
+  display: inline-block;
+
+  font:
+    8px
+    "Fira Code";
+
+  margin-top: 3px;
+
+  padding:
+    3px
+    5px;
+
+  border-radius: 4px;
+
+  background: #172233;
+
+  color: #a9b7ca;
+
+}
+
+
+.formula {
+
+  font:
+    11px
+    "Fira Code";
+
+  color: #b9c5ff;
+
+  margin-top: 10px;
+
+  word-break: break-word;
+
+}
+
+
+/* ============================= */
+/* STATISTICS */
+/* ============================= */
+
+.stats {
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 6px;
+
+  margin-bottom: 12px;
+
+}
+
+
+.stats div {
+
+  padding: 9px;
+
+  background: #0b1019;
+
+  border:
+    1px solid
+    #202a3b;
+
+  border-radius: 8px;
+
+  text-align: center;
+
+}
+
+
+.stats b {
+
+  display: block;
+
+  font:
+    700 15px
+    "Fira Code";
+
+  color: #c7d2fe;
+
+}
+
+
+.stats small {
+
+  font-size: 7px;
+
+  color: #66738b;
+
+}
+
+
+/* ============================= */
+/* TABLE */
+/* ============================= */
+
+.table-wrap {
+
+  border:
+    1px solid
+    #222d40;
+
+  border-radius: 9px;
+
+  overflow: auto;
+
+  max-height: 320px;
+
+}
+
+
+table {
+
+  width: 100%;
+
+  border-collapse: collapse;
+
+  font:
+    10px
+    "Fira Code";
+
+  text-align: center;
+
+}
+
+
+th {
+
+  position: sticky;
+
+  top: 0;
+
+  background: #161e2d;
+
+  color: #8d9ab0;
+
+  padding: 8px;
+
+  border-bottom:
+    1px solid
+    #29344a;
+
+}
+
+
+td {
+
+  padding: 7px;
+
+  border-bottom:
+    1px solid
+    #1c2636;
+
+}
+
+
+.true {
+
+  color: var(--green);
+
+}
+
+
+.false {
+
+  color: var(--red);
+
+}
+
+
+tr.critical {
+
+  background: #32131e;
+
+  box-shadow:
+    inset 2px 0
+    var(--red);
+
+}
+
+
+/* ============================= */
+/* LEGEND */
+/* ============================= */
+
+.legend {
+
+  display: flex;
+
+  gap: 12px;
+
+  font:
+    8px
+    "Fira Code";
+
+  margin:
+    9px
+    0;
+
+  color: #78869b;
+
+}
+
+
+.legend .true {
+
+  color: var(--green);
+
+}
+
+
+.legend .false {
+
+  color: var(--red);
+
+}
+
+
+.legend .critical {
+
+  color: var(--amber);
+
+}
+
+
+/* ============================= */
+/* SUMMARY */
+/* ============================= */
+
+.quick-item {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  gap: 8px;
+
+  padding:
+    8px
+    0;
+
+  border-bottom:
+    1px solid
+    #1d2635;
+
+  font-size: 10px;
+
+}
+
+
+.quick-item span {
+
+  color: #7f8ca1;
+
+  text-align: right;
+
+}
+
+
+/* ============================= */
+/* HIDDEN */
+/* ============================= */
+
+.hidden {
+
+  display: none !important;
+
+}
+
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+
+footer {
+
+  text-align: center;
+
+  color: #58657a;
+
+  font:
+    8px
+    "Fira Code";
+
+  padding: 8px;
+
+}
+
+
+/* ============================= */
+/* TABLET */
+/* ============================= */
+
+@media (max-width: 1000px) {
+
+  .dashboard {
+
+    grid-template-columns:
+      1fr
+      1fr;
+
+    height: auto;
+
+    min-height: 0;
+
+  }
+
+
+  .result-panel {
+
+    grid-column:
+      1 / -1;
+
+    min-height: 400px;
+
+  }
+
+}
+
+
+/* ============================= */
+/* MOBILE */
+/* ============================= */
+
+@media (max-width: 680px) {
+
+  .app {
+
+    padding: 10px;
+
+  }
+
+
+  .topbar {
+
+    height: auto;
+
+  }
+
+
+  .status {
+
+    display: none;
+
+  }
+
+
+  .dashboard {
+
+    display: flex;
+
+    flex-direction: column;
+
+  }
+
+
+  .panel {
+
+    overflow: visible;
+
+  }
+
+
+  .project-panel,
+  .simulator-panel,
+  .result-panel {
+
+    min-height: auto;
+
+  }
+
+
+  h2 {
+
+    font-size: 17px;
+
+  }
+
+}
