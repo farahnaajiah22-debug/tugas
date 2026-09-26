@@ -3,1234 +3,646 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PJBL-1 Presentation & Simulator Deck</title>
-  <script src="https://cdn.tailwindcss.com"></script>
+
+  <title>Logic Proposition Simulator</title>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {
-          fontFamily: {
-            sans: ['"Space Grotesk"', 'sans-serif'],
-            mono: ['"Fira Code"', 'monospace'],
-          },
-          colors: {
-            surface: {
-              DEFAULT: '#0f131d',
-              dim: '#0b0e17',
-              container: '#161b28',
-              high: '#1e2436',
-              highest: '#283046'
-            },
-            primary: {
-              DEFAULT: '#6366f1',
-              hover: '#4f46e5',
-              light: '#818cf8',
-              container: '#1e1b4b'
-            },
-            accent: {
-              cyan: '#06b6d4',
-              emerald: '#10b981',
-              amber: '#f59e0b',
-              rose: '#f43f5e'
-            }
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    body {
-      background-color: #0b0e17;
-      color: #f1f5f9;
-      font-family: 'Space Grotesk', sans-serif;
-      -webkit-tap-highlight-color: transparent;
-    }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 4px;
-      height: 4px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: #283046;
-      border-radius: 4px;
-    }
-    .slide-panel {
-      display: none;
-      opacity: 0;
-      transition: opacity 0.25s ease-in-out;
-    }
-    .slide-panel.active {
-      display: block;
-      opacity: 1;
-    }
-    .glow-indigo {
-      box-shadow: 0 0 25px -5px rgba(99, 102, 241, 0.35);
-    }
-  </style>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-[#0b0e17] text-slate-100 min-h-screen flex justify-center selection:bg-indigo-500 selection:text-white">
 
-  <!-- Mobile Shell Container -->
-  <div class="w-full max-w-[440px] bg-[#0f131d] min-h-screen flex flex-col relative border-x border-slate-800 shadow-2xl">
+<body>
 
-    <!-- Top Persistent App Bar -->
-    <header class="sticky top-0 z-50 bg-[#0f131d]/90 backdrop-blur-md border-b border-slate-800/80 px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center space-x-2.5">
-        <div class="w-8 h-8 rounded-lg bg-indigo-950/80 border border-indigo-500/40 flex items-center justify-center text-indigo-400 p-1">
-          <svg viewBox="0 0 100 100" fill="none" class="w-full h-full">
-            <circle cx="50" cy="50" r="42" stroke="#6366F1" stroke-width="3" stroke-dasharray="6 6"/>
-            <path d="M30 40L50 25L70 40V70L50 85L30 70V40Z" stroke="#06B6D4" stroke-width="4" stroke-linejoin="round" fill="#1E1B4B" fill-opacity="0.5"/>
-            <path d="M38 52L48 62L65 42" stroke="#10B981" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <div>
-          <div class="text-[10px] font-mono tracking-wider text-slate-400 uppercase leading-none">PJBL-1 • MATEMATIKA DISKRIT</div>
-          <div class="text-sm font-bold text-white tracking-tight flex items-center gap-1.5 mt-0.5">
-            <span>Defense Presentation</span>
-            <span class="inline-flex items-center px-1.5 py-0.2 text-[9px] font-mono font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 rounded">VERIFIED</span>
-          </div>
-        </div>
+<div class="app">
+
+  <!-- HEADER -->
+  <header class="topbar">
+
+    <div class="brand">
+
+      <div class="logo">
+        ∴
       </div>
 
-      <!-- Slide Indicator Badge & Quick Fullscreen -->
-      <div class="flex items-center gap-2">
-        <div class="bg-slate-800/90 border border-slate-700 rounded-md px-2 py-1 text-center font-mono">
-          <div class="text-[9px] text-slate-400 uppercase leading-none">SLIDE</div>
-          <div class="text-xs font-bold text-indigo-300 leading-none mt-0.5" id="topSlideIndicator">01 / 04</div>
+      <div>
+        <div class="eyebrow">
+          PJBL • MATEMATIKA DISKRIT
         </div>
-        <button onclick="toggleQuickMenu()" title="Info Proyek" class="w-8 h-8 rounded-md bg-slate-800/70 border border-slate-700/80 flex items-center justify-center text-slate-300 hover:text-white hover:bg-slate-700 transition">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        </button>
+
+        <h1>
+          Logic Proposition Simulator
+        </h1>
       </div>
-    </header>
 
-    <!-- Main Content Area: Slides Container -->
-    <main class="flex-1 pb-24 overflow-y-auto custom-scrollbar">
-
-      <!-- ============================================== -->
-      <!-- SLIDE 1: COVER PROYEK & IDENTITAS TIM          -->
-      <!-- ============================================== -->
-      <section id="slide-1" class="slide-panel active p-4 space-y-4">
-        
-        <!-- Breadcrumb & Badge -->
-        <div class="flex items-center justify-between text-[11px] font-mono border-b border-slate-800/60 pb-2">
-          <span class="text-indigo-400 font-semibold flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
-            SLIDE 01 / 04 • OVERVIEW & IDENTITAS
-          </span>
-          <span class="text-emerald-400 bg-emerald-950/40 border border-emerald-500/30 px-2 py-0.5 rounded text-[10px]">
-            PJBL-1 VERIFIED
-          </span>
-        </div>
-
-        <!-- Project Hero Card -->
-        <div class="p-5 rounded-2xl bg-gradient-to-br from-indigo-950/50 via-[#161b28] to-[#121622] border border-indigo-500/30 glow-indigo space-y-3">
-          <div class="flex items-center gap-2">
-            <span class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 text-[10px] font-mono font-semibold tracking-wide border border-indigo-500/40">FINAL DEFENSE DECK</span>
-            <span class="text-[10px] font-mono text-slate-400">• PJBL-1</span>
-          </div>
-
-          <h1 class="text-2xl font-bold tracking-tight text-white leading-tight uppercase font-sans">
-            Simulator Tabel Kebenaran & Verifikator Argumen Logika
-          </h1>
-          <p class="text-xs text-slate-300 leading-relaxed">
-            Rancang bangun perangkat lunak evaluasi validitas inferensi proposisional berbasis algoritma Truth Matrix deterministic dan Abstract Syntax Tree (AST).
-          </p>
-
-          <div class="flex flex-wrap gap-1.5 pt-1">
-            <span class="text-[10px] font-mono bg-slate-800/80 border border-slate-700/80 text-slate-300 px-2 py-0.5 rounded">3-5 Variabel Proposisi</span>
-            <span class="text-[10px] font-mono bg-slate-800/80 border border-slate-700/80 text-cyan-300 px-2 py-0.5 rounded">O(2ⁿ) Evaluator Engine</span>
-            <span class="text-[10px] font-mono bg-slate-800/80 border border-slate-700/80 text-emerald-300 px-2 py-0.5 rounded">Tautology & Fallacy Detector</span>
-          </div>
-        </div>
-
-        <!-- Academic Info & Supervisor Card -->
-        <div class="p-4 rounded-xl bg-[#161b28] border border-slate-800 space-y-3">
-          <div class="flex items-center gap-2 text-xs font-semibold text-cyan-400">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
-            <span class="uppercase tracking-wider text-[11px] font-mono">Institusi & Pembimbing</span>
-          </div>
-
-          <div>
-            <div class="text-[11px] text-slate-400 font-mono">MATA KULIAH</div>
-            <div class="text-sm font-semibold text-white">Matematika Diskrit / Logika Komputasi</div>
-            <div class="text-[11px] text-slate-400">Semester Ganjil 2026/2027 • Modul PJBL-1</div>
-          </div>
-
-          <div class="p-3 rounded-lg bg-slate-900/80 border border-slate-800 flex items-center gap-3">
-            <div class="w-9 h-9 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center font-bold text-sm border border-cyan-500/30">
-              DK
-            </div>
-            <div>
-              <div class="text-[10px] font-mono text-slate-400 uppercase">Dosen Pengampu & Pembimbing</div>
-              <div class="text-xs font-semibold text-slate-100">Ully Muzakir,MT</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Team Members Card -->
-        <div class="p-4 rounded-xl bg-[#161b28] border border-slate-800 space-y-3">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2 text-xs font-semibold text-indigo-400">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-              <span class="uppercase tracking-wider text-[11px] font-mono">Tim Pengembang (kelompok D)</span>
-            </div>
-            <span class="text-[10px] font-mono text-slate-400 bg-slate-800 px-2 py-0.5 rounded">5 Anggota</span>
-          </div>
-
-          <div class="space-y-2">
-            <!-- Member 1 -->
-            <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-indigo-500/40 transition">
-              <div class="flex items-center gap-2.5">
-                <span class="w-7 h-7 rounded-md bg-indigo-500/20 text-indigo-300 font-mono text-xs font-bold flex items-center justify-center border border-indigo-500/30">MA</span>
-                <div>
-                  <div class="text-xs font-semibold text-slate-200">Farah Naajiah</div>
-                  <div class="text-[10px] text-indigo-400 font-mono">Ketua Kelompok</div>
-                </div>
-              </div>
-              <span class="text-[10px] font-mono text-slate-400 bg-slate-800/80 px-1.5 py-0.5 rounded">25210167</span>
-            </div>
-            <!-- Member 2 -->
-            <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-cyan-500/40 transition">
-              <div class="flex items-center gap-2.5">
-                <span class="w-7 h-7 rounded-md bg-cyan-500/20 text-cyan-300 font-mono text-xs font-bold flex items-center justify-center border border-cyan-500/30">SN</span>
-                <div>
-                  <div class="text-xs font-semibold text-slate-200">Rindi Saskia</div>
-                  <div class="text-[10px] text-cyan-400 font-mono">Koordinator Dokumentasi</div>
-                </div>
-              </div>
-              <span class="text-[10px] font-mono text-slate-400 bg-slate-800/80 px-1.5 py-0.5 rounded">25210235</span>
-            </div>
-            <!-- Member 3 -->
-            <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-emerald-500/40 transition">
-              <div class="flex items-center gap-2.5">
-                <span class="w-7 h-7 rounded-md bg-emerald-500/20 text-emerald-300 font-mono text-xs font-bold flex items-center justify-center border border-emerald-500/30">KC</span>
-                <div>
-                  <div class="text-xs font-semibold text-slate-200">Yasir Alkausar</div>
-                  <div class="text-[10px] text-emerald-400 font-mono">TKoordinator Teknis</div>
-                </div>
-              </div>
-              <span class="text-[10px] font-mono text-slate-400 bg-slate-800/80 px-1.5 py-0.5 rounded">25210173</span>
-            </div>
-          </div>
-
-          <!-- Member 4 -->
-          <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-amber-500/40 transition">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-md bg-amber-500/20 text-amber-300 font-mono text-xs font-bold flex items-center justify-center border border-amber-500/30">A4</span>
-              <div>
-                <div class="text-xs font-semibold text-slate-200">Wasykur</div>
-                <div class="text-[10px] text-amber-400 font-mono">Koordinator Presentasi</div>
-              </div>
-            </div>
-            <span class="text-[10px] font-mono text-slate-400 bg-slate-800/80 px-1.5 py-0.5 rounded">25210044</span>
-          </div>
-
-          <!-- Member 5 -->
-          <div class="flex items-center justify-between p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80 hover:border-rose-500/40 transition">
-            <div class="flex items-center gap-2.5">
-              <span class="w-7 h-7 rounded-md bg-rose-500/20 text-rose-300 font-mono text-xs font-bold flex items-center justify-center border border-rose-500/30">A5</span>
-              <div>
-                <div class="text-xs font-semibold text-slate-200">Ubay Dillah</div>
-                <div class="text-[10px] text-rose-400 font-mono">Pendamping Koordinator Presentasi</div>
-              </div>
-            </div>
-            <span class="text-[10px] font-mono text-slate-400 bg-slate-800/80 px-1.5 py-0.5 rounded">25210274</span>
-          </div>
-        </div>
-        </div>
-
-        <!-- Goals / Objectives -->
-        <div class="p-4 rounded-xl bg-[#161b28] border border-slate-800 space-y-2.5">
-          <div class="flex items-center gap-2 text-xs font-semibold text-emerald-400">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            <span class="uppercase tracking-wider text-[11px] font-mono">Tujuan & Nilai Kebaruan Proyek</span>
-          </div>
-
-          <div class="grid grid-cols-1 gap-2 text-xs text-slate-300">
-            <div class="p-2.5 rounded-lg bg-slate-900/40 border border-slate-800/70 flex gap-2.5 items-start">
-              <span class="text-indigo-400 font-bold font-mono">01</span>
-              <div>
-                <strong class="text-slate-100">Automasi Formal Proof Argumentasi:</strong> Memvalidasi silogisme, modus ponens, dan modus tollens dengan inferensi deterministik bebas kalkulasi manual.
-              </div>
-            </div>
-            <div class="p-2.5 rounded-lg bg-slate-900/40 border border-slate-800/70 flex gap-2.5 items-start">
-              <span class="text-indigo-400 font-bold font-mono">02</span>
-              <div>
-                <strong class="text-slate-100">Eliminasi Human Error Matrix n-Variabel:</strong> Menghasilkan ruang status kombinatorial 2ⁿ secara presisi dengan penandaan baris kritis otomatis.
-              </div>
-            </div>
-            <div class="p-2.5 rounded-lg bg-slate-900/40 border border-slate-800/70 flex gap-2.5 items-start">
-              <span class="text-indigo-400 font-bold font-mono">03</span>
-              <div>
-                <strong class="text-slate-100">Visualisasi Interaktif Step-by-Step:</strong> Mengurai prioritas operator (¬, ∧, ∨, →, ↔) dengan rendering sub-ekspresi bertahap.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Quick Sample / Live Preview Snippet -->
-        <div class="p-3 rounded-xl bg-slate-950 border border-indigo-500/20 font-mono text-[11px] space-y-2">
-          <div class="flex justify-between text-slate-400 text-[10px]">
-            <span>INTERACTIVE FORMULA PREVIEW</span>
-            <span class="text-emerald-400">Preview Model</span>
-          </div>
-          <div class="p-2 bg-slate-900 rounded border border-slate-800 text-indigo-300 flex justify-between items-center">
-            <span>(p → q) ∧ p ⊢ q</span>
-            <span class="px-2 py-0.5 rounded text-[10px] bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">VALID (TAUTOLOGY)</span>
-          </div>
-          <div class="grid grid-cols-4 gap-1 text-center text-[10px] text-slate-400 pt-1">
-            <div class="bg-slate-900/60 p-1 rounded">p: <span class="text-emerald-400 font-bold">T</span></div>
-            <div class="bg-slate-900/60 p-1 rounded">q: <span class="text-emerald-400 font-bold">T</span></div>
-            <div class="bg-slate-900/60 p-1 rounded">p→q: <span class="text-emerald-400 font-bold">T</span></div>
-            <div class="bg-slate-900/60 p-1 rounded text-emerald-300 font-bold">OUT: T</div>
-          </div>
-        </div>
-
-        <!-- Action / CTA to Next Slide -->
-        <div class="pt-2 space-y-2">
-          <button onclick="goToSlide(2)" class="w-full py-3 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30 transition">
-            <span>Mulai Presentasi (Slide 2)</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-          <button onclick="goToSlide(3)" class="w-full py-2.5 px-4 rounded-xl bg-slate-800/80 hover:bg-slate-800 text-indigo-300 font-medium text-xs flex items-center justify-center gap-1.5 border border-slate-700/80 transition">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-            <span>Langsung ke Live Demo Simulator</span>
-          </button>
-        </div>
-
-        <div class="text-center font-mono text-[10px] text-slate-500 pt-2">
-          PJBL 1 • DEPARTEMEN TEKNIK INFORMATIKA • 2024
-        </div>
-      </section>
-
-
-      <!-- ============================================== -->
-      <!-- SLIDE 2: LATAR BELAKANG & ARSITEKTUR LOGIKA     -->
-      <!-- ============================================== -->
-      <section id="slide-2" class="slide-panel p-4 space-y-4">
-        
-        <!-- Breadcrumb & Badge -->
-        <div class="flex items-center justify-between text-[11px] font-mono border-b border-slate-800/60 pb-2">
-          <span class="text-cyan-400 font-semibold flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
-            SLIDE 02 / 04 • LATAR BELAKANG & TUJUAN
-          </span>
-          <span class="text-slate-400 text-[10px]">DISCRETE MATH PJBL</span>
-        </div>
-
-        <div>
-          <h2 class="text-xl font-bold text-white tracking-tight leading-snug">
-            Mengapa Logika Proposisi Membutuhkan <span class="text-cyan-400">Verifikasi Otomatis</span>?
-          </h2>
-          <p class="text-xs text-slate-400 mt-1">
-            Tantangan komputasi kombinatorial manual dan transisi menuju arsitektur verifikasi deduktif berbasis AST.
-          </p>
-        </div>
-
-        <!-- Problem Statement Card -->
-        <div class="p-4 rounded-xl bg-rose-950/20 border border-rose-500/30 space-y-3">
-          <div class="flex items-center gap-2">
-            <div class="w-6 h-6 rounded bg-rose-500/20 text-rose-400 flex items-center justify-center text-xs font-bold">
-              !
-            </div>
-            <div>
-              <div class="text-[10px] font-mono text-rose-300 uppercase">IDENTIFIKASI KENDALA</div>
-              <h3 class="text-xs font-bold text-white">Masalah Utama (Problem Statement)</h3>
-            </div>
-          </div>
-
-          <div class="space-y-2 text-xs text-slate-300">
-            <div class="p-2.5 rounded-lg bg-slate-900/60 border border-rose-500/20 flex gap-2.5">
-              <span class="text-rose-400 font-mono font-bold">2ⁿ</span>
-              <div>
-                <strong class="text-slate-200">Kompleksitas Eksponensial:</strong> Skalabilitas tabel kebenaran membengkak drastis saat melibatkan >3 variabel (p, q, r, s = 16 hingga 32 baris), memicu titik jenuh dan rentan kekeliruan analisis mahasiswa.
-              </div>
-            </div>
-            <div class="p-2.5 rounded-lg bg-slate-900/60 border border-rose-500/20 flex gap-2.5">
-              <span class="text-rose-400 font-mono font-bold">↻</span>
-              <div>
-                <strong class="text-slate-200">Ambiguitas Inferensi:</strong> Pembuktian formal (Modus Tollens, Silogisme Hipotetis) kerap terhambat oleh kesalahan parsing tanda kurung, presedensi operator, dan penerapan Hukum De Morgan secara manual.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Proposed Architecture Card -->
-        <div class="p-4 rounded-xl bg-[#161b28] border border-cyan-500/30 space-y-3">
-          <div class="flex items-center gap-2">
-            <div class="w-6 h-6 rounded bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">
-              ⚙
-            </div>
-            <div>
-              <div class="text-[10px] font-mono text-cyan-300 uppercase">PENDEKATAN REKAYASA</div>
-              <h3 class="text-xs font-bold text-white">Solusi yang Dikembangkan</h3>
-            </div>
-          </div>
-
-          <div class="grid grid-cols-1 gap-2 text-xs">
-            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800">
-              <div class="font-mono text-indigo-300 font-semibold text-[11px] mb-0.5">Recursive Descent Parser</div>
-              <div class="text-slate-400 text-[11px]">Mengurai notasi infix proposisi menjadi Abstract Syntax Tree (AST) secara deterministik dan hierarkis.</div>
-            </div>
-            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800">
-              <div class="font-mono text-cyan-300 font-semibold text-[11px] mb-0.5">Truth Matrix Generator</div>
-              <div class="text-slate-400 text-[11px]">Evaluasi kebenaran bitwise instan tiap sub-ekspresi dengan kalkulasi deterministik step-by-step.</div>
-            </div>
-            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800">
-              <div class="font-mono text-emerald-300 font-semibold text-[11px] mb-0.5">Argument Validity Engine</div>
-              <div class="text-slate-400 text-[11px]">Menilai formalitas tautologi implikasi <code class="text-slate-300 font-mono font-semibold">[(P₁ ∧ P₂ ∧ ... ∧ Pₙ) → C]</code> dalam orde milidetik.</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- System Pipeline Flow Diagram -->
-        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-[11px] space-y-3">
-          <div class="flex items-center justify-between text-[10px] text-slate-400">
-            <span class="text-indigo-400 font-bold uppercase">PIPELINE EKSEKUSI LOGIKA</span>
-            <span>PJBL-ENGINE v1.0</span>
-          </div>
-
-          <div class="grid grid-cols-2 gap-2 text-[10px]">
-            <div class="p-2 rounded bg-slate-900 border border-slate-800">
-              <div class="text-slate-500">01. INGEST</div>
-              <div class="font-bold text-slate-200 mt-0.5">Input Formula</div>
-              <div class="text-[9px] text-slate-400">Premis & Konklusi</div>
-            </div>
-            <div class="p-2 rounded bg-slate-900 border border-slate-800">
-              <div class="text-slate-500">02. SYNTAX</div>
-              <div class="font-bold text-indigo-300 mt-0.5">AST Parser</div>
-              <div class="text-[9px] text-slate-400">Lexer Tokenization</div>
-            </div>
-            <div class="p-2 rounded bg-slate-900 border border-slate-800">
-              <div class="text-slate-500">03. COMPUTE</div>
-              <div class="font-bold text-cyan-300 mt-0.5">Bitwise Evaluator</div>
-              <div class="text-[9px] text-slate-400">Matrix Combinations</div>
-            </div>
-            <div class="p-2 rounded bg-slate-900 border border-emerald-500/40 bg-emerald-950/20">
-              <div class="text-emerald-500">04. VERIFY</div>
-              <div class="font-bold text-emerald-300 mt-0.5">Valid / Fallacy</div>
-              <div class="text-[9px] text-emerald-400">Tautology Output</div>
-            </div>
-          </div>
-
-          <div class="h-1 w-full bg-slate-800 rounded-full overflow-hidden flex">
-            <div class="bg-indigo-500 w-1/4 h-full"></div>
-            <div class="bg-cyan-500 w-1/4 h-full"></div>
-            <div class="bg-blue-500 w-1/4 h-full"></div>
-            <div class="bg-emerald-500 w-1/4 h-full"></div>
-          </div>
-        </div>
-
-        <!-- Academic Impact Metric -->
-        <div class="p-3.5 rounded-xl bg-indigo-950/30 border border-indigo-500/30 flex items-center gap-3">
-          <div class="w-10 h-10 rounded-lg bg-indigo-500/20 text-indigo-400 flex items-center justify-center font-bold text-base border border-indigo-500/30">
-            ⚡
-          </div>
-          <div>
-            <div class="text-[10px] font-mono text-indigo-300 font-semibold uppercase">KEY ACADEMIC IMPACT</div>
-            <div class="text-xs text-slate-300 mt-0.5">
-              Memangkas durasi audit validitas deduktif dari rata-rata <span class="text-rose-400 font-bold">~15 menit manual</span> menjadi <span class="text-emerald-400 font-bold">&lt; 40 milidetik</span> dengan tingkat presisi formal 100%.
-            </div>
-          </div>
-        </div>
-
-        <!-- Navigation Buttons -->
-        <div class="grid grid-cols-2 gap-2 pt-2">
-          <button onclick="goToSlide(1)" class="py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center justify-center gap-1.5 transition">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-            <span>Slide 1</span>
-          </button>
-          <button onclick="goToSlide(3)" class="py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-md shadow-indigo-600/30 transition">
-            <span>Lanjut Slide 3</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-        </div>
-      </section>
-
-
-      <!-- ============================================== -->
-      <!-- SLIDE 3: LIVE DEMO SIMULATOR INTERAKTIF         -->
-      <!-- ============================================== -->
-      <section id="slide-3" class="slide-panel p-4 space-y-4">
-        
-        <!-- Breadcrumb & Mode Status -->
-        <div class="flex items-center justify-between text-[11px] font-mono border-b border-slate-800/60 pb-2">
-          <span class="text-indigo-400 font-semibold flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse"></span>
-            SLIDE 03 / 04 • LIVE DEMO SIMULATOR
-          </span>
-          <span class="text-emerald-400 bg-emerald-950/40 border border-emerald-500/30 px-2 py-0.5 rounded text-[10px]">
-            ● ONLINE / READY
-          </span>
-        </div>
-
-        <div>
-          <h2 class="text-xl font-bold text-white tracking-tight leading-snug">
-            Interactive Logic Workbench
-          </h2>
-          <p class="text-xs text-slate-400 mt-1">
-            Formal argument verification and analytical truth engine for Discrete Mathematics PJBL-1.
-          </p>
-        </div>
-
-        <!-- Mode Selector Switch -->
-        <div class="grid grid-cols-2 gap-1 bg-slate-900 p-1 rounded-xl border border-slate-800 text-xs font-mono font-medium">
-          <button id="modeBtnFormula" onclick="switchSimulatorMode('formula')" class="py-1.5 rounded-lg text-slate-400 hover:text-white transition">
-            Modus 1: Formula Tunggal
-          </button>
-          <button id="modeBtnArg" onclick="switchSimulatorMode('argument')" class="py-1.5 rounded-lg bg-indigo-600 text-white font-semibold transition">
-            Modus 2: Uji Validitas Argumen
-          </button>
-        </div>
-
-        <!-- Interactive Workbench Card -->
-        <div class="p-4 rounded-xl bg-[#161b28] border border-indigo-500/30 space-y-3">
-          
-          <!-- Argument Mode Inputs -->
-          <div id="argumentInputs" class="space-y-2.5">
-            <div>
-              <div class="flex justify-between items-center text-[11px] font-mono text-slate-400 mb-1">
-                <span class="text-indigo-300 font-semibold">Premis 1 (Kondisional)</span>
-                <span class="text-slate-500">P₁: p → q</span>
-              </div>
-              <div class="relative">
-                <input id="inputPremise1" type="text" value="p -> q" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-indigo-500">
-              </div>
-              <div class="text-[10px] text-slate-400 italic mt-0.5">"Jika server overload, waktu respons melonjak drastis."</div>
-            </div>
-
-            <div>
-              <div class="flex justify-between items-center text-[11px] font-mono text-slate-400 mb-1">
-                <span class="text-cyan-300 font-semibold">Premis 2 (Fakta Observasi)</span>
-                <span class="text-slate-500">P₂: ¬q</span>
-              </div>
-              <div class="relative">
-                <input id="inputPremise2" type="text" value="~q" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-cyan-500">
-              </div>
-              <div class="text-[10px] text-slate-400 italic mt-0.5">"Waktu respons normal / latensi stabil (tidak melonjak)."</div>
-            </div>
-
-            <div>
-              <div class="flex justify-between items-center text-[11px] font-mono text-slate-400 mb-1">
-                <span class="text-emerald-300 font-semibold">Konklusi Diturunkan</span>
-                <span class="text-slate-500">C: ¬p</span>
-              </div>
-              <div class="relative">
-                <input id="inputConclusion" type="text" value="~p" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-emerald-500">
-              </div>
-              <div class="text-[10px] text-slate-400 italic mt-0.5">"Maka server dipastikan tidak mengalami overload."</div>
-            </div>
-          </div>
-
-          <!-- Formula Mode Input (Hidden initially) -->
-          <div id="formulaInputs" class="hidden space-y-2">
-            <div class="flex justify-between items-center text-[11px] font-mono text-slate-400">
-              <span class="text-indigo-300 font-semibold">Input Ekspresi Logika Proposisi</span>
-              <span class="text-slate-500">Infix String</span>
-            </div>
-            <input id="inputFormulaSingle" type="text" value="(p & q) -> (p | ~r)" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-xs font-mono text-white focus:outline-none focus:border-indigo-500">
-            <div class="text-[10px] text-slate-400">Dukungan operator: <code class="text-indigo-300">&amp;</code> (AND), <code class="text-cyan-300">|</code> (OR), <code class="text-rose-300">~</code> (NOT), <code class="text-amber-300">-&gt;</code> (IMPLIKASI), <code class="text-emerald-300">&lt;-&gt;</code> (BI-IMPLIKASI).</div>
-          </div>
-
-          <!-- Quick Logic Keypad -->
-          <div class="pt-1">
-            <div class="text-[10px] font-mono text-slate-400 mb-1.5 uppercase tracking-wide">Operator Palette (Simbol Cepat)</div>
-            <div class="grid grid-cols-6 gap-1 font-mono text-xs">
-              <button onclick="insertSymbol(' ∧ ')" class="py-1.5 bg-slate-900 hover:bg-slate-800 text-indigo-300 rounded border border-slate-800 font-bold transition">∧</button>
-              <button onclick="insertSymbol(' ∨ ')" class="py-1.5 bg-slate-900 hover:bg-slate-800 text-cyan-300 rounded border border-slate-800 font-bold transition">∨</button>
-              <button onclick="insertSymbol('¬')" class="py-1.5 bg-slate-900 hover:bg-slate-800 text-rose-300 rounded border border-slate-800 font-bold transition">¬</button>
-              <button onclick="insertSymbol(' → ')" class="py-1.5 bg-slate-900 hover:bg-slate-800 text-amber-300 rounded border border-slate-800 font-bold transition">→</button>
-              <button onclick="insertSymbol(' ↔ ')" class="py-1.5 bg-slate-900 hover:bg-slate-800 text-emerald-300 rounded border border-slate-800 font-bold transition">↔</button>
-              <button onclick="insertSymbol('( )')" class="py-1.5 bg-slate-900 hover:bg-slate-800 text-slate-300 rounded border border-slate-800 font-bold transition">( )</button>
-            </div>
-          </div>
-
-          <!-- Execute Button -->
-          <button onclick="executeSimulator()" class="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-500 hover:to-indigo-600 text-white font-mono font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-indigo-600/30 transition">
-            <svg class="w-4 h-4 text-emerald-300 animate-spin" id="execSpinner" style="display:none;" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path></svg>
-            <span id="execBtnText">⚡ Evaluasi Argumen [EXECUTE]</span>
-          </button>
-        </div>
-
-        <!-- Live Results / Verification Status Box -->
-        <div id="resultCard" class="p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/40 space-y-3">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span id="statusIcon" class="w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold border border-emerald-500/40">✓</span>
-              <div>
-                <div class="text-[10px] font-mono text-emerald-400 uppercase font-semibold">HASIL PEMBUKTIAN FORMAL</div>
-                <div id="statusTitle" class="text-sm font-bold text-white">ARGUMEN VALID (SAH)</div>
-              </div>
-            </div>
-            <span id="ruleBadge" class="text-[10px] font-mono bg-emerald-950 border border-emerald-500/40 text-emerald-300 px-2 py-0.5 rounded">
-              Modus Tollens
-            </span>
-          </div>
-
-          <!-- Conditional Tautology Formula Display -->
-          <div class="p-2.5 rounded-lg bg-slate-950 border border-slate-800 font-mono text-[11px] space-y-1">
-            <div class="text-[10px] text-slate-400 flex justify-between">
-              <span>Formula Bentuk Bersyarat:</span>
-              <span class="text-emerald-400 font-semibold" id="tautologyLabel">TAUTOLOGI</span>
-            </div>
-            <div id="formulaFullString" class="text-slate-100 font-bold overflow-x-auto whitespace-nowrap">
-              [(p → q) ∧ ¬q] → ¬p ≡ TRUE (Semua Baris)
-            </div>
-          </div>
-
-          <div id="statusExplanation" class="text-xs text-slate-300 leading-relaxed">
-            Tidak ditemukan baris kritis dengan premis-premis bernilai Benar (T) yang menghasilkan konklusi Salah (F). Argumen terbukti secara deduktif matematis.
-          </div>
-        </div>
-
-        <!-- Dynamic Truth Matrix Table -->
-        <div class="p-4 rounded-xl bg-[#161b28] border border-slate-800 space-y-3">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2 text-xs font-semibold text-slate-200">
-              <span class="font-mono text-indigo-400">#</span>
-              <span>Matriks Evaluasi Kebenaran</span>
-            </div>
-            <span id="rowCounterBadge" class="text-[10px] font-mono text-cyan-400 bg-cyan-950/40 border border-cyan-500/30 px-2 py-0.5 rounded">
-              2² = 4 Baris
-            </span>
-          </div>
-
-          <div class="overflow-x-auto custom-scrollbar">
-            <table id="truthTable" class="w-full text-center font-mono text-[11px] border-collapse">
-              <thead>
-                <tr class="bg-slate-900/90 text-slate-400 border-b border-slate-800">
-                  <th class="py-2 px-2 text-[10px] font-medium">Row</th>
-                  <th class="py-2 px-2 text-cyan-400">p</th>
-                  <th class="py-2 px-2 text-cyan-400">q</th>
-                  <th class="py-2 px-2 text-indigo-300">p → q</th>
-                  <th class="py-2 px-2 text-rose-300">¬q</th>
-                  <th class="py-2 px-2 text-amber-300">Premis ∧</th>
-                  <th class="py-2 px-2 text-slate-300">¬p (C)</th>
-                  <th class="py-2 px-2 text-emerald-400 font-bold bg-emerald-950/30">Hasil [→ C]</th>
-                </tr>
-              </thead>
-              <tbody id="truthTableBody" class="divide-y divide-slate-800/60">
-                <tr class="hover:bg-slate-800/40">
-                  <td class="py-2 px-2 text-slate-500">#1</td>
-                  <td class="py-2 px-2 text-emerald-400 font-bold">T</td>
-                  <td class="py-2 px-2 text-emerald-400 font-bold">T</td>
-                  <td class="py-2 px-2 text-emerald-400">T</td>
-                  <td class="py-2 px-2 text-rose-400">F</td>
-                  <td class="py-2 px-2 text-rose-400">F</td>
-                  <td class="py-2 px-2 text-rose-400">F</td>
-                  <td class="py-2 px-2 text-emerald-400 font-bold bg-emerald-950/20">T</td>
-                </tr>
-                <tr class="hover:bg-slate-800/40">
-                  <td class="py-2 px-2 text-slate-500">#2</td>
-                  <td class="py-2 px-2 text-emerald-400 font-bold">T</td>
-                  <td class="py-2 px-2 text-rose-400 font-bold">F</td>
-                  <td class="py-2 px-2 text-rose-400">F</td>
-                  <td class="py-2 px-2 text-emerald-400">T</td>
-                  <td class="py-2 px-2 text-rose-400">F</td>
-                  <td class="py-2 px-2 text-rose-400">F</td>
-                  <td class="py-2 px-2 text-emerald-400 font-bold bg-emerald-950/20">T</td>
-                </tr>
-                <tr class="hover:bg-slate-800/40">
-                  <td class="py-2 px-2 text-slate-500">#3</td>
-                  <td class="py-2 px-2 text-rose-400 font-bold">F</td>
-                  <td class="py-2 px-2 text-emerald-400 font-bold">T</td>
-                  <td class="py-2 px-2 text-emerald-400">T</td>
-                  <td class="py-2 px-2 text-rose-400">F</td>
-                  <td class="py-2 px-2 text-rose-400">F</td>
-                  <td class="py-2 px-2 text-emerald-400">T</td>
-                  <td class="py-2 px-2 text-emerald-400 font-bold bg-emerald-950/20">T</td>
-                </tr>
-                <tr class="bg-indigo-950/40 border border-indigo-500/50">
-                  <td class="py-2 px-2 text-indigo-300 font-bold">● #4</td>
-                  <td class="py-2 px-2 text-rose-400 font-bold">F</td>
-                  <td class="py-2 px-2 text-rose-400 font-bold">F</td>
-                  <td class="py-2 px-2 text-emerald-400">T</td>
-                  <td class="py-2 px-2 text-emerald-400 font-bold">T</td>
-                  <td class="py-2 px-2 text-emerald-400 font-bold text-xs">T*</td>
-                  <td class="py-2 px-2 text-emerald-400 font-bold">T</td>
-                  <td class="py-2 px-2 text-emerald-400 font-bold bg-emerald-950/40">T</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <div class="text-[10px] text-slate-400 flex items-center gap-1.5 pt-1">
-            <span class="w-2 h-2 rounded-full bg-indigo-400"></span>
-            <span>Row #4 adalah <strong>Baris Kritis</strong>: Semua premis bernilai T dan konklusi bernilai T.</span>
-          </div>
-        </div>
-
-        <!-- Presets Selection for Live Testing during Defense -->
-        <div class="p-3.5 rounded-xl bg-slate-900 border border-slate-800 space-y-2">
-          <div class="flex justify-between items-center text-[10px] font-mono text-slate-400">
-            <span>COBA KASUS PEMBUKTIAN LAIN:</span>
-            <span class="text-indigo-400">3 Presets</span>
-          </div>
-          <div class="grid grid-cols-1 gap-1.5">
-            <button onclick="loadPreset('modus_tollens')" class="text-left p-2 rounded-lg bg-slate-950/80 hover:bg-slate-800 border border-slate-800/80 flex items-center justify-between text-xs font-mono transition">
-              <div>
-                <span class="text-slate-200 font-bold">1. Modus Tollens (Hukum Penolakan)</span>
-                <span class="block text-[10px] text-slate-400 font-sans">P1: p→q, P2: ¬q, C: ¬p (Valid)</span>
-              </div>
-              <span class="text-emerald-400 font-sans text-xs">Pilih ▸</span>
-            </button>
-            <button onclick="loadPreset('fallacy_consequent')" class="text-left p-2 rounded-lg bg-slate-950/80 hover:bg-slate-800 border border-slate-800/80 flex items-center justify-between text-xs font-mono transition">
-              <div>
-                <span class="text-rose-300 font-bold">2. Fallacy of Affirming the Consequent</span>
-                <span class="block text-[10px] text-slate-400 font-sans">P1: p→q, P2: q, C: p (Invalid / Gugur di Row #3)</span>
-              </div>
-              <span class="text-rose-400 font-sans text-xs">Pilih ▸</span>
-            </button>
-            <button onclick="loadPreset('disjunctive_syllogism')" class="text-left p-2 rounded-lg bg-slate-950/80 hover:bg-slate-800 border border-slate-800/80 flex items-center justify-between text-xs font-mono transition">
-              <div>
-                <span class="text-cyan-300 font-bold">3. Silogisme Disjungtif</span>
-                <span class="block text-[10px] text-slate-400 font-sans">P1: p∨q, P2: ¬p, C: q (Valid)</span>
-              </div>
-              <span class="text-cyan-400 font-sans text-xs">Pilih ▸</span>
-            </button>
-          </div>
-        </div>
-
-        <!-- Navigation Buttons -->
-        <div class="grid grid-cols-2 gap-2 pt-2">
-          <button onclick="goToSlide(2)" class="py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-semibold flex items-center justify-center gap-1.5 transition">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-            <span>Slide 2</span>
-          </button>
-          <button onclick="goToSlide(4)" class="py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-bold flex items-center justify-center gap-1.5 shadow-md shadow-indigo-600/30 transition">
-            <span>Hasil & Kesimpulan (Slide 4)</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-          </button>
-        </div>
-      </section>
-
-
-      <!-- ============================================== -->
-      <!-- SLIDE 4: HASIL PENGUJIAN & KESIMPULAN           -->
-      <!-- ============================================== -->
-      <section id="slide-4" class="slide-panel p-4 space-y-4">
-        
-        <!-- Breadcrumb & Badge -->
-        <div class="flex items-center justify-between text-[11px] font-mono border-b border-slate-800/60 pb-2">
-          <span class="text-indigo-400 font-semibold flex items-center gap-1.5">
-            <span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>
-            SLIDE 04 / 04 • HASIL PENGUJIAN & KESIMPULAN
-          </span>
-          <span class="text-emerald-400 bg-emerald-950/40 border border-emerald-500/30 px-2 py-0.5 rounded text-[10px]">
-            EVALUASI FINAL
-          </span>
-        </div>
-
-        <div>
-          <h2 class="text-xl font-bold text-white tracking-tight leading-snug">
-            Hasil Uji Validasi & Evaluasi Sistem
-          </h2>
-          <p class="text-xs text-slate-400 mt-1">
-            Rekapitulasi pembuktian formal proposisi matematika diskrit dan evaluasi performa runtime simulator.
-          </p>
-        </div>
-
-        <!-- Metric Stat Cards -->
-        <div class="grid grid-cols-3 gap-2">
-          <div class="p-3 rounded-xl bg-[#161b28] border border-emerald-500/30 text-center">
-            <div class="text-[9px] font-mono text-emerald-400 uppercase font-bold">AKURASI</div>
-            <div class="text-xl font-bold text-white font-mono mt-0.5">100%</div>
-            <div class="text-[9px] text-slate-400 mt-0.5">25 / 25 Kasus Uji Formal</div>
-          </div>
-          <div class="p-3 rounded-xl bg-[#161b28] border border-cyan-500/30 text-center">
-            <div class="text-[9px] font-mono text-cyan-400 uppercase font-bold">AVG LATENSI</div>
-            <div class="text-xl font-bold text-white font-mono mt-0.5">24.5<span class="text-xs text-slate-400 font-sans">ms</span></div>
-            <div class="text-[9px] text-slate-400 mt-0.5">Render & Evaluasi Penuh</div>
-          </div>
-          <div class="p-3 rounded-xl bg-[#161b28] border border-indigo-500/30 text-center">
-            <div class="text-[9px] font-mono text-indigo-400 uppercase font-bold">HEAP MEMORY</div>
-            <div class="text-xl font-bold text-white font-mono mt-0.5">&lt;8<span class="text-xs text-slate-400 font-sans">MB</span></div>
-            <div class="text-[9px] text-slate-400 mt-0.5">Peak Browser Overhead</div>
-          </div>
-        </div>
-
-        <!-- Verification Summary Table Card -->
-        <div class="p-4 rounded-xl bg-[#161b28] border border-slate-800 space-y-3">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2 text-xs font-semibold text-slate-200">
-              <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
-              <span>Tabel Rekapitulasi Kasus Uji Formal</span>
-            </div>
-            <span class="text-[10px] font-mono text-slate-400 bg-slate-800 px-2 py-0.5 rounded">4 Sampel Utama</span>
-          </div>
-
-          <div class="space-y-2 text-xs font-mono">
-            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 flex justify-between items-center">
-              <div>
-                <div class="text-slate-200 font-bold text-[11px]">1. Modus Ponens</div>
-                <div class="text-[10px] text-slate-400 font-sans">[(p ∧ (p → q))] → q</div>
-              </div>
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950 text-emerald-400 border border-emerald-500/40">VALID (TAUTOLOGI)</span>
-            </div>
-
-            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 flex justify-between items-center">
-              <div>
-                <div class="text-slate-200 font-bold text-[11px]">2. Silogisme Hipotetis</div>
-                <div class="text-[10px] text-slate-400 font-sans">[(p→q) ∧ (q→r)] → (p→r)</div>
-              </div>
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-950 text-emerald-400 border border-emerald-500/40">VALID (TAUTOLOGI)</span>
-            </div>
-
-            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-rose-500/30 bg-rose-950/10 flex justify-between items-center">
-              <div>
-                <div class="text-rose-300 font-bold text-[11px]">3. Consequent Fallacy</div>
-                <div class="text-[10px] text-slate-400 font-sans">[(p → q) ∧ q] → p</div>
-              </div>
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-rose-950 text-rose-400 border border-rose-500/40">INVALID (FALLACY)</span>
-            </div>
-
-            <div class="p-2.5 rounded-lg bg-slate-900/80 border border-slate-800 flex justify-between items-center">
-              <div>
-                <div class="text-slate-200 font-bold text-[11px]">4. De Morgan 4-Var</div>
-                <div class="text-[10px] text-slate-400 font-sans">¬(p ∧ q ∧ r ∧ s) ↔ ...</div>
-              </div>
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-cyan-950 text-cyan-400 border border-cyan-500/40">EKUIVALEN (16 BARIS)</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- Performance / Latency Chart Mock -->
-        <div class="p-4 rounded-xl bg-slate-950 border border-slate-800 font-mono text-[11px] space-y-3">
-          <div class="flex justify-between items-center text-[10px] text-slate-400">
-            <span class="text-indigo-400 font-bold">DISTRIBUSI WAKTU KOMPUTASI MATRIX</span>
-            <span class="text-emerald-400">Sub-50ms Budget</span>
-          </div>
-
-          <div class="space-y-2">
-            <div>
-              <div class="flex justify-between text-[10px] text-slate-300 mb-1">
-                <span>2 Variabel (4 baris)</span>
-                <span class="text-cyan-400 font-bold">12 ms</span>
-              </div>
-              <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                <div class="bg-cyan-400 h-full w-[24%]"></div>
-              </div>
-            </div>
-
-            <div>
-              <div class="flex justify-between text-[10px] text-slate-300 mb-1">
-                <span>3 Variabel (8 baris)</span>
-                <span class="text-indigo-400 font-bold">28 ms</span>
-              </div>
-              <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                <div class="bg-indigo-400 h-full w-[45%]"></div>
-              </div>
-            </div>
-
-            <div>
-              <div class="flex justify-between text-[10px] text-slate-300 mb-1">
-                <span>4 Variabel (16 baris)</span>
-                <span class="text-emerald-400 font-bold">41 ms</span>
-              </div>
-              <div class="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
-                <div class="bg-emerald-400 h-full w-[70%]"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Project Conclusion Points -->
-        <div class="p-4 rounded-xl bg-[#161b28] border border-slate-800 space-y-2.5">
-          <div class="flex items-center gap-2 text-xs font-semibold text-indigo-400">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-            <span class="uppercase tracking-wider text-[11px] font-mono">Kesimpulan Proyek & Rekomendasi</span>
-          </div>
-
-          <div class="space-y-2 text-xs text-slate-300">
-            <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80 flex gap-2.5 items-start">
-              <span class="w-5 h-5 rounded-md bg-indigo-500/20 text-indigo-300 font-mono font-bold text-xs flex items-center justify-center shrink-0">1</span>
-              <div>
-                <strong class="text-slate-100">Otomasi Pembuktian Proposisi Berhasil Penuh:</strong> Simulator mengonversi ekspresi logika bebas ke dalam AST dan mengeksekusi tabel kebenaran secara otomatis tanpa cacat kalkulasi pada seluruh pengujian.
-              </div>
-            </div>
-            <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80 flex gap-2.5 items-start">
-              <span class="w-5 h-5 rounded-md bg-cyan-500/20 text-cyan-300 font-mono font-bold text-xs flex items-center justify-center shrink-0">2</span>
-              <div>
-                <strong class="text-slate-100">Identifikasi Visual Counterexample yang Akurat:</strong> Mempermudah mahasiswa mendeteksi baris kritis pembatal validitas (kondisi premis bernilai BENAR namun konklusi bernilai SALAH) lewat penandaan baris interaktif.
-              </div>
-            </div>
-            <div class="p-2.5 rounded-lg bg-slate-900/60 border border-slate-800/80 flex gap-2.5 items-start">
-              <span class="w-5 h-5 rounded-md bg-emerald-500/20 text-emerald-300 font-mono font-bold text-xs flex items-center justify-center shrink-0">3</span>
-              <div>
-                <strong class="text-slate-100">Rekomendasi Pengembangan (Next Milestone):</strong> Integrasi solver Logika Predikat Orde Pertama (First-Order Logic) dengan kuantor universal (∀) dan eksistensial (∃) serta resolusi otomatis Robinson.
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Closing / Q&A Card -->
-        <div class="p-5 rounded-2xl bg-gradient-to-br from-indigo-950/60 via-[#161b28] to-[#121622] border border-indigo-500/40 text-center space-y-3">
-          <div class="w-12 h-12 rounded-2xl bg-indigo-500/20 border border-indigo-500/40 text-indigo-400 mx-auto flex items-center justify-center">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-          </div>
-          <div>
-            <h3 class="text-lg font-bold text-white">Terima Kasih!</h3>
-            <p class="text-xs text-indigo-300 mt-0.5 font-medium">Sesi Tanya Jawab (Q&A) Dibuka</p>
-            <p class="text-[11px] text-slate-400 mt-1 max-w-xs mx-auto">
-              Silakan dewan penguji dan rekan mahasiswa mengajukan tanggapan atau skenario uji coba lanjutan.
-            </p>
-          </div>
-          <div class="pt-2 flex flex-col gap-2">
-            <button onclick="goToSlide(3)" class="w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-md shadow-indigo-600/30 transition">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-              <span>Buka Demo Bebas & Benchmark</span>
-            </button>
-            <button onclick="goToSlide(1)" class="w-full py-2 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs flex items-center justify-center gap-1.5 transition">
-              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a8 8 0 018 8v2M3 10l6 6m-6-6l6-6"/></svg>
-              <span>Kembali ke Slide Awal</span>
-            </button>
-          </div>
-        </div>
-
-      </section>
-
-    </main>
-
-    <!-- Bottom Persistent Interactive Navigation Bar -->
-    <nav class="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[440px] z-50 bg-[#0f131d]/95 backdrop-blur-md border-t border-slate-800 px-3 py-2 flex items-center justify-around shadow-2xl">
-      <button onclick="goToSlide(1)" id="navBtn1" class="flex flex-col items-center gap-0.5 px-2.5 py-1 rounded-lg text-indigo-400 transition">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-        <span class="text-[9px] font-mono font-medium">Cover</span>
-      </button>
-
-      <button onclick="goToSlide(2)" id="navBtn2" class="flex flex-col items-center gap-0.5 px-2.5 py-1 rounded-lg text-slate-400 hover:text-slate-200 transition">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-        <span class="text-[9px] font-mono font-medium">Teori</span>
-      </button>
-
-      <!-- Center Highlight: Live Demo -->
-      <button onclick="goToSlide(3)" id="navBtn3" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-mono font-bold text-xs shadow-lg shadow-indigo-600/30 transition transform active:scale-95">
-        <svg class="w-3.5 h-3.5 text-emerald-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-        <span>LIVE DEMO</span>
-      </button>
-
-      <button onclick="goToSlide(4)" id="navBtn4" class="flex flex-col items-center gap-0.5 px-2.5 py-1 rounded-lg text-slate-400 hover:text-slate-200 transition">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
-        <span class="text-[9px] font-mono font-medium">Hasil</span>
-      </button>
-    </nav>
-
-    <!-- Quick Info Modal -->
-    <div id="quickModal" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
-      <div class="bg-[#161b28] border border-slate-700 rounded-2xl max-w-xs w-full p-4 space-y-3 text-xs">
-        <div class="flex justify-between items-center pb-2 border-b border-slate-700">
-          <span class="font-bold text-white">Panduan Navigasi</span>
-          <button onclick="toggleQuickMenu()" class="text-slate-400 hover:text-white">✕</button>
-        </div>
-        <p class="text-slate-300">
-          Dokumen ini berisi gabungan seluruh deck <strong>PJBL-1: Simulator Tabel Kebenaran & Verifikator Argumen Logika</strong> dalam 1 file mandiri.
-        </p>
-        <div class="space-y-1 font-mono text-[11px] text-slate-300">
-          <div>• <strong>Tombol Bawah:</strong> Berpindah slide secara instan.</div>
-          <div>• <strong>Live Demo:</strong> Simulator logika interaktif dengan evaluator deterministik.</div>
-          <div>• <strong>Preset Uji:</strong> Mendukung pengujian Modus Tollens, Fallacy, dan Silogisme.</div>
-        </div>
-        <button onclick="toggleQuickMenu()" class="w-full py-2 bg-indigo-600 rounded-lg text-white font-semibold">Tutup</button>
-      </div>
     </div>
 
-  </div>
+    <div class="status">
+      <span></span>
+      ONE SCREEN
+    </div>
 
-  <!-- Unified Interactive Script Logic -->
-  <script>
-    let currentSlide = 1;
-    let currentMode = 'argument'; // 'argument' or 'formula'
+  </header>
 
-    // Slide Navigation Controller
-    function goToSlide(slideNumber) {
-      currentSlide = slideNumber;
 
-      // Update slide visibility
-      document.querySelectorAll('.slide-panel').forEach(panel => {
-        panel.classList.remove('active');
-      });
-      const activePanel = document.getElementById(`slide-${slideNumber}`);
-      if (activePanel) {
-        activePanel.classList.add('active');
-      }
+  <!-- DASHBOARD -->
+  <main class="dashboard">
 
-      // Update top indicator
-      document.getElementById('topSlideIndicator').innerText = `0${slideNumber} / 04`;
 
-      // Update navigation active styles
-      for (let i = 1; i <= 4; i++) {
-        const btn = document.getElementById(`navBtn${i}`);
-        if (!btn) continue;
-        if (i === 3) {
-          // Special center live demo button styling
-          if (slideNumber === 3) {
-            btn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-500 text-white font-mono font-bold text-xs ring-2 ring-indigo-400 shadow-lg shadow-indigo-600/40 transition transform active:scale-95";
-          } else {
-            btn.className = "flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-mono font-bold text-xs shadow-lg shadow-indigo-600/30 transition transform active:scale-95";
-          }
-        } else {
-          if (i === slideNumber) {
-            btn.className = "flex flex-col items-center gap-0.5 px-2.5 py-1 rounded-lg text-indigo-400 bg-indigo-950/40 transition";
-          } else {
-            btn.className = "flex flex-col items-center gap-0.5 px-2.5 py-1 rounded-lg text-slate-400 hover:text-slate-200 transition";
-          }
-        }
-      }
+    <!-- ============================= -->
+    <!-- PANEL KIRI -->
+    <!-- ============================= -->
 
-      // Scroll to top of panel smoothly
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
+    <aside class="panel project-panel">
 
-    // Toggle Simulator Mode (Single Formula vs Argument Check)
-    function switchSimulatorMode(mode) {
-      currentMode = mode;
-      const btnFormula = document.getElementById('modeBtnFormula');
-      const btnArg = document.getElementById('modeBtnArg');
-      const argInputs = document.getElementById('argumentInputs');
-      const formulaInputs = document.getElementById('formulaInputs');
+      <div class="panel-title">
+        <span>01</span>
+        PROYEK
+      </div>
 
-      if (mode === 'formula') {
-        btnFormula.className = "py-1.5 rounded-lg bg-indigo-600 text-white font-semibold transition";
-        btnArg.className = "py-1.5 rounded-lg text-slate-400 hover:text-white transition";
-        argInputs.classList.add('hidden');
-        formulaInputs.classList.remove('hidden');
-        document.getElementById('execBtnText').innerText = "⚡ Generate Tabel Kebenaran";
-      } else {
-        btnArg.className = "py-1.5 rounded-lg bg-indigo-600 text-white font-semibold transition";
-        btnFormula.className = "py-1.5 rounded-lg text-slate-400 hover:text-white transition";
-        formulaInputs.classList.add('hidden');
-        argInputs.classList.remove('hidden');
-        document.getElementById('execBtnText').innerText = "⚡ Evaluasi Argumen [EXECUTE]";
-      }
-    }
+      <h2>
+        Simulator Tabel Kebenaran & Verifikator Argumen Logika
+      </h2>
 
-    // Insert math symbol to currently active input
-    function insertSymbol(sym) {
-      let targetInput = document.getElementById('inputPremise1');
-      if (currentMode === 'formula') {
-        targetInput = document.getElementById('inputFormulaSingle');
-      } else {
-        const active = document.activeElement;
-        if (active && (active.id === 'inputPremise1' || active.id === 'inputPremise2' || active.id === 'inputConclusion')) {
-          targetInput = active;
-        }
-      }
-      
-      const start = targetInput.selectionStart || targetInput.value.length;
-      const end = targetInput.selectionEnd || targetInput.value.length;
-      const val = targetInput.value;
-      targetInput.value = val.substring(0, start) + sym + val.substring(end);
-      targetInput.focus();
-      targetInput.setSelectionRange(start + sym.length, start + sym.length);
-    }
+      <p class="muted">
+        Aplikasi untuk membantu mengevaluasi proposisi,
+        tabel kebenaran, dan validitas argumen secara interaktif.
+      </p>
 
-    // Presets Loader for Defense Demo
-    function loadPreset(presetKey) {
-      switchSimulatorMode('argument');
-      const p1 = document.getElementById('inputPremise1');
-      const p2 = document.getElementById('inputPremise2');
-      const c = document.getElementById('inputConclusion');
 
-      if (presetKey === 'modus_tollens') {
-        p1.value = "p -> q";
-        p2.value = "~q";
-        c.value = "~p";
-        renderTollensResult();
-      } else if (presetKey === 'fallacy_consequent') {
-        p1.value = "p -> q";
-        p2.value = "q";
-        c.value = "p";
-        renderFallacyResult();
-      } else if (presetKey === 'disjunctive_syllogism') {
-        p1.value = "p | q";
-        p2.value = "~p";
-        c.value = "q";
-        renderDisjunctiveResult();
-      }
-    }
+      <!-- INFORMASI PROYEK -->
 
-    // Execution simulation animation & state trigger
-    function executeSimulator() {
-      const spinner = document.getElementById('execSpinner');
-      const btnText = document.getElementById('execBtnText');
-      spinner.style.display = 'inline-block';
-      btnText.innerText = "Menganalisis Pola AST...";
+      <div class="info-box">
 
-      setTimeout(() => {
-        spinner.style.display = 'none';
-        if (currentMode === 'argument') {
-          const p1 = document.getElementById('inputPremise1').value;
-          const p2 = document.getElementById('inputPremise2').value;
-          const c = document.getElementById('inputConclusion').value;
-          btnText.innerText = "⚡ Evaluasi Argumen [EXECUTE]";
+        <b>Mata Kuliah</b>
 
-          if (p1.includes('->') && p2.includes('q') && !p2.includes('~') && c.includes('p')) {
-            renderFallacyResult();
-          } else if (p1.includes('|')) {
-            renderDisjunctiveResult();
-          } else {
-            renderTollensResult();
-          }
-        } else {
-          btnText.innerText = "⚡ Generate Tabel Kebenaran";
-          renderFormulaResult();
-        }
-      }, 300);
-    }
+        <span>
+          Matematika Diskrit / Logika Komputasi
+        </span>
 
-    // Renderer for Valid Modus Tollens
-    function renderTollensResult() {
-      const resultCard = document.getElementById('resultCard');
-      resultCard.className = "p-4 rounded-xl bg-emerald-950/20 border border-emerald-500/40 space-y-3";
-      document.getElementById('statusIcon').className = "w-6 h-6 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xs font-bold border border-emerald-500/40";
-      document.getElementById('statusIcon').innerText = "✓";
-      document.getElementById('statusTitle').innerText = "ARGUMEN VALID (SAH)";
-      document.getElementById('ruleBadge').className = "text-[10px] font-mono bg-emerald-950 border border-emerald-500/40 text-emerald-300 px-2 py-0.5 rounded";
-      document.getElementById('ruleBadge').innerText = "Modus Tollens";
-      document.getElementById('tautologyLabel').innerText = "TAUTOLOGI (TRUE DI SEMUA BARIS)";
-      document.getElementById('tautologyLabel').className = "text-emerald-400 font-semibold";
-      document.getElementById('formulaFullString').innerText = "[(p → q) ∧ ¬q] → ¬p ≡ TRUE (Semua Baris)";
-      document.getElementById('statusExplanation').innerText = "Tidak ditemukan baris kritis dengan premis bernilai Benar (T) yang menghasilkan konklusi Salah (F). Argumen terbukti secara deduktif matematis.";
+      </div>
 
-      // Truth Table Rendering
-      document.getElementById('truthTable').innerHTML = `
-        <thead>
-          <tr class="bg-slate-900/90 text-slate-400 border-b border-slate-800">
-            <th class="py-2 px-2 text-[10px]">Row</th>
-            <th class="py-2 px-2 text-cyan-400">p</th>
-            <th class="py-2 px-2 text-cyan-400">q</th>
-            <th class="py-2 px-2 text-indigo-300">p → q</th>
-            <th class="py-2 px-2 text-rose-300">¬q</th>
-            <th class="py-2 px-2 text-amber-300">P₁ ∧ P₂</th>
-            <th class="py-2 px-2 text-slate-300">¬p (C)</th>
-            <th class="py-2 px-2 text-emerald-400 font-bold bg-emerald-950/30">Implikasi [→ C]</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-slate-800/60 font-mono text-center">
-          <tr>
-            <td class="py-2 text-slate-500">#1</td>
-            <td class="text-emerald-400 font-bold">T</td><td class="text-emerald-400 font-bold">T</td>
-            <td class="text-emerald-400">T</td><td class="text-rose-400">F</td><td class="text-rose-400">F</td>
-            <td class="text-rose-400">F</td><td class="text-emerald-400 font-bold bg-emerald-950/20">T</td>
-          </tr>
-          <tr>
-            <td class="py-2 text-slate-500">#2</td>
-            <td class="text-emerald-400 font-bold">T</td><td class="text-rose-400 font-bold">F</td>
-            <td class="text-rose-400">F</td><td class="text-emerald-400">T</td><td class="text-rose-400">F</td>
-            <td class="text-rose-400">F</td><td class="text-emerald-400 font-bold bg-emerald-950/20">T</td>
-          </tr>
-          <tr>
-            <td class="py-2 text-slate-500">#3</td>
-            <td class="text-rose-400 font-bold">F</td><td class="text-emerald-400 font-bold">T</td>
-            <td class="text-emerald-400">T</td><td class="text-rose-400">F</td><td class="text-rose-400">F</td>
-            <td class="text-emerald-400">T</td><td class="text-emerald-400 font-bold bg-emerald-950/20">T</td>
-          </tr>
-          <tr class="bg-indigo-950/50 border border-indigo-500/60">
-            <td class="py-2 text-indigo-300 font-bold">● #4</td>
-            <td class="text-rose-400 font-bold">F</td><td class="text-rose-400 font-bold">F</td>
-            <td class="text-emerald-400">T</td><td class="text-emerald-400 font-bold">T</td><td class="text-emerald-400 font-bold">T*</td>
-            <td class="text-emerald-400 font-bold">T</td><td class="text-emerald-400 font-bold bg-emerald-950/40">T</td>
-          </tr>
-        </tbody>
-      `;
-    }
 
-    // Renderer for Invalid Fallacy of Affirming Consequent
-    function renderFallacyResult() {
-      const resultCard = document.getElementById('resultCard');
-      resultCard.className = "p-4 rounded-xl bg-rose-950/25 border border-rose-500/50 space-y-3";
-      document.getElementById('statusIcon').className = "w-6 h-6 rounded-full bg-rose-500/20 text-rose-400 flex items-center justify-center text-xs font-bold border border-rose-500/40";
-      document.getElementById('statusIcon').innerText = "✕";
-      document.getElementById('statusTitle').innerText = "ARGUMEN INVALID (KESESATAN / FALLACY)";
-      document.getElementById('ruleBadge').className = "text-[10px] font-mono bg-rose-950 border border-rose-500/40 text-rose-300 px-2 py-0.5 rounded";
-      document.getElementById('ruleBadge').innerText = "Affirming the Consequent";
-      document.getElementById('tautologyLabel').innerText = "BUKAN TAUTOLOGI (DITEMUKAN COUNTEREXAMPLE)";
-      document.getElementById('tautologyLabel').className = "text-rose-400 font-semibold";
-      document.getElementById('formulaFullString').innerText = "[(p → q) ∧ q] → p ≢ TRUE (Gugur di Baris #3)";
-      document.getElementById('statusExplanation').innerText = "Ditemukan baris kritis pada Row #3 di mana seluruh premis bernilai Benar (T), namun konklusi bernilai Salah (F). Sehingga argumen cacat secara logika.";
+      <div class="info-box">
 
-      // Truth Table Rendering with Critical Fallacy Row Highlight
-      document.getElementById('truthTable').innerHTML = `
-        <thead>
-          <tr class="bg-slate-900/90 text-slate-400 border-b border-slate-800">
-            <th class="py-2 px-2 text-[10px]">Row</th>
-            <th class="py-2 px-2 text-cyan-400">p</th>
-            <th class="py-2 px-2 text-cyan-400">q</th>
-            <th class="py-2 px-2 text-indigo-300">p → q</th>
-            <th class="py-2 px-2 text-amber-300">Premis (q)</th>
-            <th class="py-2 px-2 text-rose-300 font-bold">C (p)</th>
-            <th class="py-2 px-2 text-rose-400 font-bold bg-rose-950/40">Status [→ C]</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-slate-800/60 font-mono text-center">
-          <tr>
-            <td class="py-2 text-slate-500">#1</td>
-            <td class="text-emerald-400">T</td><td class="text-emerald-400">T</td>
-            <td class="text-emerald-400">T</td><td class="text-emerald-400 font-bold">T</td>
-            <td class="text-emerald-400 font-bold">T</td><td class="text-emerald-400 font-bold">T</td>
-          </tr>
-          <tr>
-            <td class="py-2 text-slate-500">#2</td>
-            <td class="text-emerald-400">T</td><td class="text-rose-400">F</td>
-            <td class="text-rose-400">F</td><td class="text-rose-400">F</td>
-            <td class="text-emerald-400">T</td><td class="text-emerald-400">T</td>
-          </tr>
-          <tr class="bg-rose-950/50 border border-rose-500/70">
-            <td class="py-2 text-rose-300 font-bold">⚠ #3</td>
-            <td class="text-rose-400 font-bold">F</td><td class="text-emerald-400 font-bold">T</td>
-            <td class="text-emerald-400">T</td><td class="text-emerald-400 font-bold">T*</td>
-            <td class="text-rose-400 font-bold text-xs bg-rose-900/50">F (CACAT)</td>
-            <td class="text-rose-400 font-bold bg-rose-900/80">F</td>
-          </tr>
-          <tr>
-            <td class="py-2 text-slate-500">#4</td>
-            <td class="text-rose-400">F</td><td class="text-rose-400">F</td>
-            <td class="text-emerald-400">T</td><td class="text-rose-400">F</td>
-            <td class="text-rose-400">F</td><td class="text-emerald-400">T</td>
-          </tr>
-        </tbody>
-      `;
-    }
+        <b>Dosen</b>
 
-    // Renderer for Disjunctive Syllogism
-    function renderDisjunctiveResult() {
-      const resultCard = document.getElementById('resultCard');
-      resultCard.className = "p-4 rounded-xl bg-cyan-950/20 border border-cyan-500/40 space-y-3";
-      document.getElementById('statusIcon').className = "w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold border border-cyan-500/40";
-      document.getElementById('statusIcon').innerText = "✓";
-      document.getElementById('statusTitle').innerText = "ARGUMEN VALID (SAH)";
-      document.getElementById('ruleBadge').className = "text-[10px] font-mono bg-cyan-950 border border-cyan-500/40 text-cyan-300 px-2 py-0.5 rounded";
-      document.getElementById('ruleBadge').innerText = "Silogisme Disjungtif";
-      document.getElementById('tautologyLabel').innerText = "TAUTOLOGI (TRUE DI SEMUA BARIS)";
-      document.getElementById('tautologyLabel').className = "text-cyan-400 font-semibold";
-      document.getElementById('formulaFullString').innerText = "[(p ∨ q) ∧ ¬p] → q ≡ TRUE";
-      document.getElementById('statusExplanation').innerText = "Bentuk silogisme disjungtif terbukti tautologis tanpa inkonsistensi baris kritis.";
-      renderTollensResult(); // table representation is clean
-    }
+        <span>
+          Ully Muzakir, MT
+        </span>
 
-    // Renderer for Single Formula Mode
-    function renderFormulaResult() {
-      const resultCard = document.getElementById('resultCard');
-      resultCard.className = "p-4 rounded-xl bg-indigo-950/20 border border-indigo-500/40 space-y-3";
-      document.getElementById('statusIcon').innerText = "≡";
-      document.getElementById('statusTitle').innerText = "TABEL KEBENARAN 3-VARIABEL (p, q, r)";
-      document.getElementById('ruleBadge').innerText = "Formula Mode";
-      document.getElementById('tautologyLabel').innerText = "KONTINJENSI (HASIL CAMPURAN T & F)";
-      document.getElementById('tautologyLabel').className = "text-amber-400 font-semibold";
-      document.getElementById('formulaFullString').innerText = "(p ∧ q) → (p ∨ ¬r)";
-      document.getElementById('statusExplanation').innerText = "Ekspresi bernilai True pada 7 baris dan False pada 0 baris (Tautologi kondisional pada domain p,q,r terdefinisi).";
-    }
+      </div>
 
-    // Modal Helper
-    function toggleQuickMenu() {
-      const modal = document.getElementById('quickModal');
-      modal.classList.toggle('hidden');
-    }
-  </script>
 
-<!-- Consolidated source phrases retained from supplied files: Validitas Deduksi Terkonfirmasi | Distribusi Waktu Komputasi Matrix -->
+      <!-- ANGGOTA -->
+
+      <div class="panel-title small">
+
+        <span>02</span>
+
+        ANGGOTA KELOMPOK
+
+      </div>
+
+
+      <div class="members">
+
+        <div>
+          <b>Farah Naajiah</b>
+          <small>
+            25210167 • Ketua
+          </small>
+        </div>
+
+
+        <div>
+          <b>Rindi Saskia</b>
+          <small>
+            25210235 • Dokumentasi
+          </small>
+        </div>
+
+
+        <div>
+          <b>Yasir Alkausar</b>
+          <small>
+            25210173 • Teknis
+          </small>
+        </div>
+
+
+        <div>
+          <b>Wasykur</b>
+          <small>
+            25210044 • Presentasi
+          </small>
+        </div>
+
+
+        <div>
+          <b>Ubay Dillah</b>
+          <small>
+            25210274 • Pendamping
+          </small>
+        </div>
+
+      </div>
+
+
+      <!-- KONSEP -->
+
+      <div class="theory">
+
+        <div class="panel-title small">
+
+          <span>03</span>
+
+          KONSEP
+
+        </div>
+
+
+        <div class="chips">
+
+          <span>
+            ¬ NOT
+          </span>
+
+          <span>
+            ∧ AND
+          </span>
+
+          <span>
+            ∨ OR
+          </span>
+
+          <span>
+            → IMPLIKASI
+          </span>
+
+          <span>
+            ↔ BIKONDISIONAL
+          </span>
+
+        </div>
+
+
+        <p class="muted">
+
+          Validitas argumen diuji dengan prinsip:
+          jika semua premis benar, konklusi harus benar
+          pada setiap baris.
+
+        </p>
+
+      </div>
+
+    </aside>
+
+
+
+    <!-- ============================= -->
+    <!-- PANEL TENGAH -->
+    <!-- ============================= -->
+
+    <section class="panel simulator-panel">
+
+      <div class="panel-title">
+
+        <span>04</span>
+
+        SIMULATOR
+
+      </div>
+
+
+      <!-- MODE -->
+
+      <div class="mode-switch">
+
+        <button
+          id="formulaMode"
+          class="mode active"
+          onclick="switchMode('formula')"
+        >
+          Tabel Formula
+        </button>
+
+
+        <button
+          id="argumentMode"
+          class="mode"
+          onclick="switchMode('argument')"
+        >
+          Uji Argumen
+        </button>
+
+      </div>
+
+
+
+      <!-- ============================= -->
+      <!-- FORMULA -->
+      <!-- ============================= -->
+
+      <div id="formulaBox">
+
+        <label>
+          Ekspresi proposisi
+        </label>
+
+
+        <input
+          id="formulaInput"
+          value="(p -> q) & p"
+          placeholder="Contoh: (p -> q) & p"
+        >
+
+
+        <!-- SYMBOL -->
+
+        <div class="symbol-row">
+
+          <button onclick="insertSymbol('¬')">
+            ¬
+          </button>
+
+          <button onclick="insertSymbol('∧')">
+            ∧
+          </button>
+
+          <button onclick="insertSymbol('∨')">
+            ∨
+          </button>
+
+          <button onclick="insertSymbol('→')">
+            →
+          </button>
+
+          <button onclick="insertSymbol('↔')">
+            ↔
+          </button>
+
+          <button onclick="insertSymbol('(')">
+            (
+          </button>
+
+          <button onclick="insertSymbol(')')">
+            )
+          </button>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ============================= -->
+      <!-- ARGUMENT -->
+      <!-- ============================= -->
+
+      <div
+        id="argumentBox"
+        class="hidden"
+      >
+
+        <label>
+          Premis 1
+        </label>
+
+        <input
+          id="premise1"
+          value="p -> q"
+        >
+
+
+        <label>
+          Premis 2
+        </label>
+
+        <input
+          id="premise2"
+          value="~q"
+        >
+
+
+        <label>
+          Konklusi
+        </label>
+
+        <input
+          id="conclusion"
+          value="~p"
+        >
+
+      </div>
+
+
+
+      <!-- PRESET -->
+
+      <div class="preset-row">
+
+        <span>
+          Preset:
+        </span>
+
+
+        <button onclick="preset('modus')">
+          Modus Tollens
+        </button>
+
+
+        <button onclick="preset('fallacy')">
+          Fallacy
+        </button>
+
+
+        <button onclick="preset('disjunctive')">
+          Disjunctive
+        </button>
+
+      </div>
+
+
+
+      <!-- EXECUTE -->
+
+      <button
+        class="execute"
+        onclick="execute()"
+      >
+
+        <span id="executeText">
+          ⚡ Generate Tabel Kebenaran
+        </span>
+
+      </button>
+
+
+
+      <!-- HASIL -->
+
+      <div
+        id="resultCard"
+        class="result valid"
+      >
+
+        <div class="result-head">
+
+          <div
+            id="resultIcon"
+            class="result-icon"
+          >
+            ✓
+          </div>
+
+
+          <div>
+
+            <div
+              id="resultTitle"
+              class="result-title"
+            >
+              SIAP DIANALISIS
+            </div>
+
+
+            <div
+              id="resultRule"
+              class="badge"
+            >
+              TRUTH TABLE
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div
+          id="resultFormula"
+          class="formula"
+        >
+          Masukkan ekspresi atau argumen
+          lalu tekan Execute.
+        </div>
+
+
+        <p
+          id="resultExplanation"
+          class="muted"
+        >
+          Hasil analisis akan muncul di panel ini.
+        </p>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- ============================= -->
+    <!-- PANEL KANAN -->
+    <!-- ============================= -->
+
+    <section class="panel result-panel">
+
+      <div class="panel-title">
+
+        <span>05</span>
+
+        HASIL ANALISIS
+
+      </div>
+
+
+
+      <!-- STATISTIK -->
+
+      <div class="stats">
+
+        <div>
+
+          <b id="rowCount">
+            4
+          </b>
+
+          <small>
+            BARIS
+          </small>
+
+        </div>
+
+
+        <div>
+
+          <b id="variableCount">
+            2
+          </b>
+
+          <small>
+            VARIABEL
+          </small>
+
+        </div>
+
+
+        <div>
+
+          <b id="statusSmall">
+            —
+          </b>
+
+          <small>
+            STATUS
+          </small>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- TABEL -->
+
+      <div class="table-wrap">
+
+        <table id="truthTable">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Row
+              </th>
+
+              <th>
+                p
+              </th>
+
+              <th>
+                q
+              </th>
+
+              <th>
+                Hasil
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody>
+          </tbody>
+
+        </table>
+
+      </div>
+
+
+
+      <!-- LEGEND -->
+
+      <div class="legend">
+
+        <span class="true">
+          ● Benar
+        </span>
+
+        <span class="false">
+          ● Salah
+        </span>
+
+        <span class="critical">
+          ● Counterexample
+        </span>
+
+      </div>
+
+
+
+      <!-- RINGKASAN -->
+
+      <div class="quick">
+
+        <div class="panel-title small">
+
+          <span>06</span>
+
+          RINGKASAN
+
+        </div>
+
+
+        <div class="quick-item">
+
+          <b>
+            Kompleksitas
+          </b>
+
+          <span>
+            2ⁿ kombinasi untuk n variabel
+          </span>
+
+        </div>
+
+
+        <div class="quick-item">
+
+          <b>
+            Tujuan
+          </b>
+
+          <span>
+            Mengurangi kesalahan analisis manual
+          </span>
+
+        </div>
+
+
+        <div class="quick-item">
+
+          <b>
+            Output
+          </b>
+
+          <span>
+            Tabel kebenaran + status validitas
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    © 2026 • PJBL Matematika Diskrit •
+    Simulator Logika Proposisi
+
+  </footer>
+
+</div>
+
+
+<!-- JAVASCRIPT -->
+
+<script src="script.js"></script>
+
 </body>
 </html>
